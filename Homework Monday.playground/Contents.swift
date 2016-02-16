@@ -15,7 +15,7 @@ func totalWords (string:String) -> [String]
 totalWords(test).count
 totalWords(hawks).count
 
-//this way seems to work better than the previous way
+//this way seems to work better than the previous way, but spaces still throw it off, not sure how to correct for this, since it counts the spaces to get the words
 func wordCount(string: String) -> Int
 {
     var wordsArray = string.characters
