@@ -18,6 +18,10 @@
 		890F8D1A1C73A13500A9921F /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D191C73A13500A9921F /* API.swift */; };
 		890F8D1C1C73A27100A9921F /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D1B1C73A27100A9921F /* Post.swift */; };
 		890F8D1E1C73A30600A9921F /* ModelAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D1D1C73A30600A9921F /* ModelAdditions.swift */; };
+		890F8D241C74ED2D00A9921F /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D231C74ED2D00A9921F /* GalleryCollectionViewCell.swift */; };
+		890F8D261C74EE9C00A9921F /* identity .swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D251C74EE9C00A9921F /* identity .swift */; };
+		890F8D281C74F24100A9921F /* GalleryCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D271C74F24100A9921F /* GalleryCustomFlowLayout.swift */; };
+		890F8D2C1C75131A00A9921F /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890F8D2B1C75131A00A9921F /* GalleryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +39,10 @@
 		890F8D191C73A13500A9921F /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		890F8D1B1C73A27100A9921F /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Post.swift; path = InstaPic/Post.swift; sourceTree = "<group>"; };
 		890F8D1D1C73A30600A9921F /* ModelAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelAdditions.swift; sourceTree = "<group>"; };
+		890F8D231C74ED2D00A9921F /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
+		890F8D251C74EE9C00A9921F /* identity .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "identity .swift"; sourceTree = "<group>"; };
+		890F8D271C74F24100A9921F /* GalleryCustomFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryCustomFlowLayout.swift; sourceTree = "<group>"; };
+		890F8D2B1C75131A00A9921F /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,9 +91,12 @@
 		890F8D101C6E8C5800A9921F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				890F8CFD1C6E885E00A9921F /* Main.storyboard */,
 				890F8D001C6E885E00A9921F /* Assets.xcassets */,
+				890F8D231C74ED2D00A9921F /* GalleryCollectionViewCell.swift */,
+				890F8D271C74F24100A9921F /* GalleryCustomFlowLayout.swift */,
+				890F8D251C74EE9C00A9921F /* identity .swift */,
 				890F8D021C6E885E00A9921F /* LaunchScreen.storyboard */,
+				890F8CFD1C6E885E00A9921F /* Main.storyboard */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -105,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				890F8CFB1C6E885E00A9921F /* ImageViewController.swift */,
+				890F8D2B1C75131A00A9921F /* GalleryViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -202,12 +214,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				890F8D2C1C75131A00A9921F /* GalleryViewController.swift in Sources */,
 				890F8D141C738B6100A9921F /* Additions.swift in Sources */,
 				890F8D171C738F4E00A9921F /* Filters.swift in Sources */,
 				890F8CFC1C6E885E00A9921F /* ImageViewController.swift in Sources */,
 				890F8D1C1C73A27100A9921F /* Post.swift in Sources */,
 				890F8CFA1C6E885E00A9921F /* AppDelegate.swift in Sources */,
+				890F8D281C74F24100A9921F /* GalleryCustomFlowLayout.swift in Sources */,
 				890F8D1A1C73A13500A9921F /* API.swift in Sources */,
+				890F8D241C74ED2D00A9921F /* GalleryCollectionViewCell.swift in Sources */,
+				890F8D261C74EE9C00A9921F /* identity .swift in Sources */,
 				890F8D1E1C73A30600A9921F /* ModelAdditions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +376,7 @@
 				890F8D0A1C6E885E00A9921F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

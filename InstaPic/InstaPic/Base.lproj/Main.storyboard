@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="c3n-Mc-Pum">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="OqH-Ce-Njo">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Image View Controller-->
+        <!--Upload Photo-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ImageViewController" customModule="InstaPic" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,6 +20,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eX9-sK-JFN">
                                 <rect key="frame" x="18" y="64" width="564" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -48,8 +49,16 @@
                                 <action selector="saveImage:" destination="BYZ-38-t0r" id="Bqe-Xf-iRA"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem id="PI7-hY-AL6"/>
                     </toolbarItems>
-                    <navigationItem key="navigationItem" id="0nh-C6-P3C"/>
+                    <navigationItem key="navigationItem" title="Upload Photo" id="0nh-C6-P3C">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="24g-Ai-Vwa">
+                            <color key="tintColor" red="1" green="0.0043720104518383263" blue="0.016445328347020838" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="deleteImage:" destination="BYZ-38-t0r" id="PKY-74-O04"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="eX9-sK-JFN" id="dsf-Ss-Uw4"/>
                     </connections>
@@ -58,10 +67,64 @@
             </objects>
             <point key="canvasLocation" x="1052" y="361"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--InstaPic-->
+        <scene sceneID="TZn-Gg-Jom">
+            <objects>
+                <viewController storyboardIdentifier="GalleryViewController" id="lVg-Q6-tux" customClass="GalleryViewController" customModule="InstaPic" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="GiK-9t-1l3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="p7v-DM-u17">
+                            <size key="itemSize" width="200" height="200"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GalleryCollectionViewCell" id="HRN-FA-jBn" customClass="GalleryCollectionViewCell" customModule="InstaPic" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="200" height="200"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" restorationIdentifier="GalleryViewControllerCell" translatesAutoresizingMaskIntoConstraints="NO" id="CVA-xp-Pku">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="CVA-xp-Pku" secondAttribute="trailing" id="PBF-AH-ZfK"/>
+                                    <constraint firstItem="CVA-xp-Pku" firstAttribute="leading" secondItem="HRN-FA-jBn" secondAttribute="leading" id="QwB-Su-cap"/>
+                                    <constraint firstAttribute="bottom" secondItem="CVA-xp-Pku" secondAttribute="bottom" id="Z25-ug-GWa"/>
+                                    <constraint firstItem="CVA-xp-Pku" firstAttribute="top" secondItem="HRN-FA-jBn" secondAttribute="top" id="uK2-Ho-vUv"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="CVA-xp-Pku" id="ash-jF-3AZ"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="lVg-Q6-tux" id="Qt5-DJ-iiQ"/>
+                            <outlet property="delegate" destination="lVg-Q6-tux" id="FYj-V8-ASN"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="InstaPic" id="Wcx-oP-TaM"/>
+                    <connections>
+                        <outlet property="collectionView" destination="GiK-9t-1l3" id="E8I-9K-x89"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QZp-ws-Pcx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2699" y="617"/>
+        </scene>
+        <!--Upload-->
         <scene sceneID="BV5-q3-Ncc">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" toolbarHidden="NO" id="c3n-Mc-Pum" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Upload" id="ura-bv-nmr"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CeE-sa-Ngj">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -78,7 +141,44 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hd5-XA-1jY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1088" y="1241"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="PoQ-AZ-3Ml">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OqH-Ce-Njo" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="sGi-qi-sJL">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="c3n-Mc-Pum" kind="relationship" relationship="viewControllers" id="D44-Cp-q72"/>
+                        <segue destination="Hr6-9f-rq9" kind="relationship" relationship="viewControllers" id="Xeq-hB-gMi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2CQ-rL-xUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="370" y="1021"/>
+        </scene>
+        <!--Feed-->
+        <scene sceneID="ZMs-5G-QSO">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hr6-9f-rq9" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Feed" id="uJf-7I-k5Z"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6nQ-oG-1UQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lVg-Q6-tux" kind="relationship" relationship="rootViewController" id="bAl-JP-dJ7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ans-th-q2J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1887" y="617"/>
         </scene>
     </scenes>
 </document>

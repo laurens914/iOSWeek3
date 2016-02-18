@@ -13,6 +13,8 @@ extension UIImage
 {
     class func resize(image: UIImage, size: CGSize) -> UIImage
     {
+        print(image.size)
+        print(size)
         UIGraphicsBeginImageContext(size)
         let rect = CGRect(x:0.0 , y: 0.0, width: size.width, height: size.height)
         image.drawInRect(rect)
@@ -31,18 +33,3 @@ extension NSURL{
     }
 }
 
-//extension UIImage
-//{
-//    class func resize(image: UIImage, size: CGSize) -> UIImage
-//    {
-//        UIGraphicsBeginImageContext(size)
-//        let rect = CGRect(x:0.0 , y: 0.0, width: size.width, height: size.height)
-//        image.drawInRect(rect)
-//        
-//        defer{
-//           UIGraphicsEndImageContext()
-//        }
-//        
-//        return UIGraphicsGetImageFromCurrentImageContext()
-//    }
-//}

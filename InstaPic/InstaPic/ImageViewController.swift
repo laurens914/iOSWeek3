@@ -13,13 +13,14 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     lazy var imagePicker = UIImagePickerController() //only var can be lazy
     var originalImage: UIImage?
     var isEdited = false
+    var didShow = false
     
     @IBOutlet weak var imageView: UIImageView!
    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    var didShow = false
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -74,42 +75,42 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         let actionSheet = UIAlertController(title: "filters", message: "please select filter", preferredStyle: .Alert)
         
         let bwAction = UIAlertAction(title: "Black & White", style: .Default) {(action) -> Void in
-            Filters.bw(image, completion: { (theImage) -> () in
+            Filters.shared.bw(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true
             })
         }
         let monoAction = UIAlertAction(title: "Monochrome", style: .Default) {(action) -> Void in
-            Filters.mono(image, completion: { (theImage) -> () in
+            Filters.shared.mono(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true
             })
         }
         let sepiaAction = UIAlertAction(title: "Sepia Tone", style: .Default) {(action) -> Void in
-            Filters.sepia(image, completion: { (theImage) -> () in
+            Filters.shared.sepia(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true
             })
         }
         let invertAction = UIAlertAction(title: "Invert Colors", style: .Default) {(action) -> Void in
-            Filters.invert(image, completion: { (theImage) -> () in
+            Filters.shared.invert(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true
             })
         }
         let pixellateAction = UIAlertAction(title: "Pixellate", style: .Default) {(action) -> Void in
-            Filters.pixellate(image, completion: { (theImage) -> () in
+            Filters.shared.pixellate(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true 
             })
         }
         let clampAction = UIAlertAction(title: "color clamp", style: .Default) {(action) -> Void in
-            Filters.clamp(image, completion: { (theImage) -> () in
+            Filters.shared.clamp(image, completion: { (theImage) -> () in
                 self.imageView.image = theImage
                 self.isEdited = true
             })
         }
-        let resetAction = UIAlertAction(title: "Reset", style: .Default){ (action) -> Void in
+        let resetAction = UIAlertAction(title: "Reset", style: .Destructive){ (action) -> Void in
             self.imageView.image = self.originalImage
             self.isEdited = false
         }
@@ -154,20 +155,37 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         }
     }
 
+    @IBAction func deleteImage(sender: AnyObject)
+    {
+        guard let _ = self.imageView.image else {return}
+        
+        let alertController = UIAlertController(title: "About to Delete Image", message: "press ok to continue", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .Default) { (action) -> Void in
+                self.imageView.image = nil
+                self.originalImage = nil
+            })
+        self.presentViewController(alertController, animated: true, completion: nil)
+       
+       
+    }
+        
+
 }
 
 extension ImageViewController
 {
     func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String: AnyObject]?)
     {
-        self.imageView.image = image
-        self.originalImage = image
+        let resizedImage = UIImage.resize(image, size: CGSize(width: image.size.width/2, height: image.size.height/2))
+        self.imageView.image = resizedImage
+        self.originalImage = resizedImage
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     
 }
 
