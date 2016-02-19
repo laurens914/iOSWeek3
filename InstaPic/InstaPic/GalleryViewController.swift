@@ -10,7 +10,9 @@ import UIKit
 
 class GalleryViewController: UIViewController
 {
-    @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+      
     
     var datasource = [Post]()
         {
@@ -22,7 +24,7 @@ class GalleryViewController: UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title="Gallery"
-        self.collectionView.collectionViewLayout = GalleryCustomFlowLayout()
+        self.collectionView.collectionViewLayout = small
         self.navigationController?.hidesBarsOnSwipe = true
         //self.scrollsToTop = true
     }
@@ -57,13 +59,52 @@ class GalleryViewController: UIViewController
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+      
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= -128.0 {
-            print("Show header...")
+    let small = GalleryCustomFlowLayout(columns: 3)
+    let medium = GalleryCustomFlowLayout(columns: 2)
+    let large = GalleryCustomFlowLayout(columns: 1)
+    
+    var postPinchTransiionCompleted = true
+    var pinchDirectionDetermined = false
+    var initalPinchScale: CGFloat = 0.0
+    var pinchPoint: CGFloat = 0.0
+    
+    
+    
+    @IBAction func pinchGesture(sender: UIPinchGestureRecognizer) {
+        if sender.state == .Began {
+            
+            
+            
+            if sender.velocity > 0 && self.collectionView.collectionViewLayout == self.small {
+                
+                self.animate(self.medium)
+            
+                
+            } else if sender.velocity > 0 && self.collectionView.collectionViewLayout == self.medium {
+                
+                self.animate(self.large)
+            }
+            
+            if sender.velocity < 0 && self.collectionView.collectionViewLayout == self.large {
+                
+                self.animate(self.medium)
+            } else if sender.velocity < 0 && self.collectionView.collectionViewLayout == self.medium {
+                
+                self.animate(self.small)
+                
+            }
         }
-    
     }
+    
+    func animate(layout: GalleryCustomFlowLayout)
+    {
+        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .CurveEaseInOut, animations: { () -> Void in
+            self.collectionView.collectionViewLayout = layout
+            }, completion: nil)
+    }
+    
 }
 
 

@@ -10,7 +10,9 @@ import UIKit
 
 class GalleryCollectionViewCell: UICollectionViewCell, Identity
 {
+    
     @IBOutlet weak var imageView: UIImageView!
+    
     
     class func id() -> String
     {

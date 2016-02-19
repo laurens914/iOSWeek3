@@ -7,13 +7,19 @@
 //
 
 import UIKit
+import Social
 
-class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, FilterPreviewDelegate {
     
     lazy var imagePicker = UIImagePickerController() //only var can be lazy
     var originalImage: UIImage?
     var isEdited = false
     var didShow = false
+    
+    func previewViewControllerDidFinish(image: UIImage)
+    {
+        self.imageView.image = image
+    }
     
     @IBOutlet weak var imageView: UIImageView!
    
@@ -66,67 +72,15 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
     
     
     @IBAction func editImage(sender: AnyObject) {
-        guard let image = self.imageView.image else {
+        guard let _ = self.imageView.image else {
             let alertController = UIAlertController(title: "No Image Selected", message: "please add an image", preferredStyle: .Alert)
             alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
             self.presentViewController(alertController, animated: true, completion: nil)
             return 
         }
-        let actionSheet = UIAlertController(title: "filters", message: "please select filter", preferredStyle: .Alert)
         
-        let bwAction = UIAlertAction(title: "Black & White", style: .Default) {(action) -> Void in
-            Filters.shared.bw(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true
-            })
-        }
-        let monoAction = UIAlertAction(title: "Monochrome", style: .Default) {(action) -> Void in
-            Filters.shared.mono(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true
-            })
-        }
-        let sepiaAction = UIAlertAction(title: "Sepia Tone", style: .Default) {(action) -> Void in
-            Filters.shared.sepia(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true
-            })
-        }
-        let invertAction = UIAlertAction(title: "Invert Colors", style: .Default) {(action) -> Void in
-            Filters.shared.invert(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true
-            })
-        }
-        let pixellateAction = UIAlertAction(title: "Pixellate", style: .Default) {(action) -> Void in
-            Filters.shared.pixellate(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true 
-            })
-        }
-        let clampAction = UIAlertAction(title: "color clamp", style: .Default) {(action) -> Void in
-            Filters.shared.clamp(image, completion: { (theImage) -> () in
-                self.imageView.image = theImage
-                self.isEdited = true
-            })
-        }
-        let resetAction = UIAlertAction(title: "Reset", style: .Destructive){ (action) -> Void in
-            self.imageView.image = self.originalImage
-            self.isEdited = false
-        }
+        performSegueWithIdentifier("showFilters", sender: self)
     
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        
-        actionSheet.addAction(bwAction)
-        actionSheet.addAction(monoAction)
-        actionSheet.addAction(sepiaAction)
-        actionSheet.addAction(invertAction)
-        actionSheet.addAction(pixellateAction)
-        actionSheet.addAction(clampAction)
-        actionSheet.addAction(resetAction)
-        actionSheet.addAction(cancelAction)
-        self.presentViewController(actionSheet, animated: true, completion: nil)
         
     }
     
@@ -168,7 +122,48 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
        
        
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let destinationViewController = segue.destinationViewController as! FiltersPreviewViewController
+        destinationViewController.image = self.imageView.image
+        previewViewControllerDidFinish(destinationViewController.image)
+        destinationViewController.delegate = self 
         
+    }
+    
+
+    
+    
+    @IBAction func share(sender: UIBarButtonItem) {
+        if imageView.image == nil {
+            let alertController = UIAlertController(title: "No Image Selected", message: "please add an image", preferredStyle: .Alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+        }
+        if let image  = self.imageView.image {
+            let actionSheet = UIAlertController(title: "Social Sharing", message: "Choose where to upload", preferredStyle: .ActionSheet)
+            let facebookAction = UIAlertAction(title: "facebook", style: .Default, handler: { (action) -> Void in
+                let serviceTypeVC = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+                serviceTypeVC.addImage(image)
+                self.presentViewController(serviceTypeVC, animated:true, completion: nil)
+                
+            })
+            let twitterAction = UIAlertAction(title: "twitter", style: .Default, handler: { (action) -> Void in
+                let serviceTypeVC = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
+                serviceTypeVC.addImage(image)
+                self.presentViewController(serviceTypeVC, animated:true, completion: nil)
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+            
+            actionSheet.addAction(facebookAction)
+            actionSheet.addAction(twitterAction)
+            actionSheet.addAction(cancelAction)
+            self.presentViewController(actionSheet, animated: true, completion: nil)
+        }
+ 
+    }
+    
 
 }
 

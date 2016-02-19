@@ -43,6 +43,11 @@ class Filters
             })
         }
     }
+    static var original = UIImage()
+    
+    func original (image: UIImage, completion: FiltersCompletion){
+        completion(theImage: image)
+    }
     
     func bw (image: UIImage, completion: FiltersCompletion)
     {

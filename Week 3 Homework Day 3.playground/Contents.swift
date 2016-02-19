@@ -4,8 +4,8 @@ import UIKit
 
 func fibonacciNumber()
 {
-    var valueOne = 0
-    var valueTwo = 1
+    var valueOne: UInt64 = 0
+    var valueTwo: UInt64 = 1
     
     for var i = 0; i < 100; i++
     {
