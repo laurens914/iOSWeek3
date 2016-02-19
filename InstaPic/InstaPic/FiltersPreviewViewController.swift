@@ -20,7 +20,7 @@ class FiltersPreviewViewController: UIViewController
     weak var delegate: FilterPreviewDelegate? 
     
     
-    var dataSource = [Filters.shared.original,Filters.shared.bw, Filters.shared.mono, Filters.shared.sepia, Filters.shared.pixellate, Filters.shared.invert, Filters.shared.clamp]
+    var dataSource = [Filters.shared.original,Filters.shared.bw, Filters.shared.mono, Filters.shared.sepia, Filters.shared.invert, Filters.shared.clamp, Filters.shared.chrome, Filters.shared.vintage, Filters.shared.instant, Filters.shared.process]
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -89,16 +89,13 @@ class ImageViewController: UIViewController, UIImagePickerControllerDelegate, UI
         guard let image = self.imageView.image else { return }
         UIImageWriteToSavedPhotosAlbum(image,self,"image:didFinishSavingWithError:contextInfo:", nil)
         
-        if isEdited {
+        
             API.shared.POST(Post(image: image)) { (success) -> () in
                 if success {
                     print("successfully uploaded to cloudkit")
                 }
             }
-        } else {
-            print("Not edited...")
         }
-    }
     
     func image(image:UIImage, didFinishSavingWithError error: NSError?, contextInfo: UnsafePointer<Void>)
     {

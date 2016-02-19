@@ -65,9 +65,21 @@ class Filters
     {
         self.filter("CIColorInvert", image:image, completion: completion)
     }
-    func pixellate (image: UIImage, completion: FiltersCompletion)
+    func chrome (image: UIImage, completion: FiltersCompletion)
     {
-        self.filter("CIPixellate", image:image, completion: completion)
+        self.filter("CIPhotoEffectChrome", image:image, completion: completion)
+    }
+    func vintage (image: UIImage, completion: FiltersCompletion)
+    {
+        self.filter("CIPhotoEffectFade", image:image, completion: completion)
+    }
+    func instant (image: UIImage, completion: FiltersCompletion)
+    {
+        self.filter("CIPhotoEffectInstant", image:image, completion: completion)
+    }
+    func process (image: UIImage, completion: FiltersCompletion)
+    {
+        self.filter("CIPhotoEffectProcess", image:image, completion: completion)
     }
     func clamp (image:UIImage, completion: FiltersCompletion)
     {
